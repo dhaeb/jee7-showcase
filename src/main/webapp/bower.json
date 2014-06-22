@@ -1,0 +1,26 @@
+{
+  "name": "crm-demo",
+  "version": "0.0.1",
+  "homepage": "https://github.com/commic/crm-demo",
+  "description": "Little showcase based on angularjs",
+  "main": "index.html",
+  "authors": [
+    "Michael Weber"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "twitter": "~3.1.1",
+    "jquery": "1.9.1",
+    "angular": "1.2.16",
+    "angular-resource": "1.2.16",
+    "angular-route": "1.2.16"
+  }
+}

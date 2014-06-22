@@ -1,0 +1,74 @@
+<!-- partial for the customer detail page for creating, updating and displaying customers -->
+
+<form class="form-horizontal" style="margin-top: 30px;">
+	<div class="row">
+		<div class="col-md-6">
+
+			<fieldset>
+				<legend ng-show="!!customer.id">
+					Edit: {{ customer.firstName }} {{ customer.lastName }} <span
+						class="subtle_text">#{{customer.id}}, created {{
+						customer.createDate | date }}</span>
+				</legend>
+
+				<legend ng-show="!customer.id"> Create Customer </legend>
+
+				<div class="control-group">
+					<label class="control-label">First name</label>
+					<div class="controls">
+						<input type="text" ng-model="customer.firstName" class="form-control">
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="inputName">Last name</label>
+					<div class="controls">
+						<input id="inputName" type="text" ng-model="customer.lastName"
+							class="form-control">
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label">Sex</label>
+					<div class="controls">
+						<label class="radio"><input type="radio" name="sexRadio"
+							ng-model="customer.sex" value="unknown">unknown</label> <label
+							class="radio"><input type="radio" name="sexRadio"
+							ng-model="customer.sex" value="male">male</label> <label
+							class="radio"><input type="radio" name="sexRadio"
+							ng-model="customer.sex" value="female">female</label>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label">E-Mail / Login</label>
+					<div class="controls">
+						<input type="text" ng-model="customer.email" class="form-control">
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label">Fon</label>
+					<div class="controls">
+						<input type="text" ng-model="customer.phone" class="form-control">
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label">Company</label>
+					<div class="controls">
+						<input type="text" ng-model="customer.company.name" class="form-control">
+					</div>
+				</div>
+
+				<div class="control-group" style="margin-top: 20px;">
+					<div class="controls">
+						<button ng-click="save()" class="btn btn-primary"><span style="margin-right: 5px;" class="glyphicon glyphicon-save"></span>Save</button>
+						<a href="#/list" class="btn btn-default"><span style="margin-right: 5px;" class="glyphicon glyphicon-log-out"></span>Cancel</a>
+					</div>
+				</div>
+
+			</fieldset>
+		</div>
+	</div>
+</form>
