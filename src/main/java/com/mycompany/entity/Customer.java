@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
  * relational database and, at the same time, be used as a transfer object for
  * customer entities that are used in the user interface.
  * 
- * @author Nils Preusker - n.preusker@gmail.com
+ * 
  */
 @Entity
 public class Customer {

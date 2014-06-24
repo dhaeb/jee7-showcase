@@ -30,7 +30,7 @@ angular.module('CrmDemo.services', [ 'ngResource' ]).value('Debouncer', {
     function($resource) {
 
       var Customer = $resource(
-          'http://localhost\\:8080/crm-demo/rest/customer/:id', {
+          'http://localhost\\:8080/jee7-showcase/rest/customer/:id', {
             id : '@id'
           }, {
             update : {

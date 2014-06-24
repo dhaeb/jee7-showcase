@@ -2,12 +2,18 @@ package com.mycompany.control;
 
 import java.util.List;
 
+import javax.ejb.Local;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.mycompany.entity.Customer;
+import com.mycompany.entity.QCustomer;
+import com.mysema.query.jpa.impl.JPAQuery;
 
+@Stateless
+@Local
 public class CustomerService {
 
   @PersistenceContext
@@ -15,6 +21,12 @@ public class CustomerService {
 
   public void saveCustomer(Customer customer) {
     entityManager.persist(customer);
+  }
+  
+  public List<Customer> findCustomers() {
+	  QCustomer customer = QCustomer.customer;
+	  JPAQuery query = new JPAQuery(entityManager);
+	  return query.from(customer).list(customer);
   }
 
   public List<Customer> findAllCustomers() {
@@ -32,7 +44,6 @@ public class CustomerService {
   }
 
   public List<Customer> findCustomers(String searchString) {
-
     String[] searchTerms = new String[]{searchString}; 
     if(searchString.contains(", ")) {
       searchTerms = searchString.split(", ");
