@@ -9,8 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.mycompany.entity.Customer;
-import com.mycompany.entity.QCustomer;
-import com.mysema.query.jpa.impl.JPAQuery;
 
 @Stateless
 @Local
@@ -22,14 +20,14 @@ public class CustomerService {
   public void saveCustomer(Customer customer) {
     entityManager.persist(customer);
   }
-  
+  /*
   public List<Customer> findCustomers() {
 	  QCustomer customer = QCustomer.customer;
 	  JPAQuery query = new JPAQuery(entityManager);
 	  return query.from(customer).list(customer);
   }
-
-  public List<Customer> findAllCustomers() {
+  */
+  public List<Customer> findCustomers() {
     TypedQuery<Customer> query = entityManager.createQuery(
         "SELECT e FROM Customer e", Customer.class);
     return (List<Customer>) query.getResultList();
