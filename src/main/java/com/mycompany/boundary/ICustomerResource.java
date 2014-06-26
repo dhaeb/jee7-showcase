@@ -147,5 +147,15 @@ public interface ICustomerResource {
 	@DELETE
 	@Path("/{customerId}")
 	Response deleteCustomer(@PathParam("customerId") Long customerId);
-
+	
+	/**
+	 * Einfache Testmethode um die Verfügbarkeit des Services zu überprüfen.
+	 * 
+	 * @return Eine einfache Zeichenkette z.B. "Hello Java EE!"
+	 */
+	@GET
+	@Path("/hello")
+	@Produces(MediaType.APPLICATION_JSON)
+	public abstract Response sayHello();
+	
 }

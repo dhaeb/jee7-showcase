@@ -20,8 +20,14 @@ public class CustomerService {
   public void saveCustomer(Customer customer) {
     entityManager.persist(customer);
   }
-
-  public List<Customer> findAllCustomers() {
+  /*
+  public List<Customer> findCustomers() {
+	  QCustomer customer = QCustomer.customer;
+	  JPAQuery query = new JPAQuery(entityManager);
+	  return query.from(customer).list(customer);
+  }
+  */
+  public List<Customer> findCustomers() {
     TypedQuery<Customer> query = entityManager.createQuery(
         "SELECT e FROM Customer e", Customer.class);
     return (List<Customer>) query.getResultList();
@@ -36,7 +42,6 @@ public class CustomerService {
   }
 
   public List<Customer> findCustomers(String searchString) {
-
     String[] searchTerms = new String[]{searchString}; 
     if(searchString.contains(", ")) {
       searchTerms = searchString.split(", ");

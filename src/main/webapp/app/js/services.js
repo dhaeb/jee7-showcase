@@ -1,7 +1,8 @@
 'use strict';
 
-/* Services */
+var MODULE_NAME = "crm-demo";
 
+/* Services */
 angular.module('CrmDemo.services', [ 'ngResource' ]).value('Debouncer', {
   /**
    * Debounce a function call, making it callable an arbitrary number of times
@@ -28,9 +29,9 @@ angular.module('CrmDemo.services', [ 'ngResource' ]).value('Debouncer', {
 }).value('version', '0.1').factory(
     'Customer',
     function($resource) {
-
       var Customer = $resource(
-          'http://localhost\\:8080/crm-demo/rest/customer/:id', {
+    		  
+          "http://localhost\\:8080/" + MODULE_NAME + "/rest/customer/:id", {
             id : '@id'
           }, {
             update : {
