@@ -1,4 +1,4 @@
-package com.mycompany.boundary;
+package com.mycompany.boundary; 
 
 import java.net.URISyntaxException;
 
@@ -21,13 +21,13 @@ import com.mycompany.entity.Customer;
 /**
  *	Diese Klasse dient zur Anbindung des Frontends. 
  *	Es werden RESTful Endpunkte (= Resourcen) definiert, 
- *	über welche das Frontend die Nutzerinteraktion weitergeben kann. 
+ *	ueber welche das Frontend die Nutzerinteraktion weitergeben kann. 
  *
  * 	Delegieren Sie die Logik der zu implementierenden Methoden an eine EJB (CustomerService).
- *  Dies sieht koennte wie folgt aussehen:
+ *  Dies koennte wie folgt aussehen:
  *  <p>
  *  <code>
-   		// import statements vernachlässigt <br/>
+   		// import statements vernachlaessigt <br/>
    		public class CustomerResource implements ICustomerResource {<br/>
 		&#064;EJB<br/>
 		private CustomerService customerService;<br/>
@@ -51,14 +51,14 @@ public interface ICustomerResource {
 
 	/**
 	 * Diese Methode dient zum Speichern eines Kunden (C from CRUD).
-	 * HTTP 201 (welche die erfolgreicher Erstellung einer Resource repräsentiert) kann wie folgt zurueckgegeben werden:
+	 * HTTP 201 (welche die erfolgreiche Erstellung einer Resource repraesentiert) kann wie folgt zurueckgegeben werden:
 	 * <p><code>
 	 * Response.created(new URI(uriInfo.getRequestUri() + "/" + customer.getId())) <br/>
 			   .build();<br/>
 	 * </code></p>
 	 * 
 	 * @param uriInfo Informationen zur aufgerufenen URL des Erstellers	
-	 * @param customer Der zu erstellenden Kunde
+	 * @param customer Der zu erstellende Kunde
 	 * @return HTTP 201 
 	 * @throws URISyntaxException
 	 */
@@ -76,8 +76,8 @@ public interface ICustomerResource {
 		}<br/>
 	 * </code></p>
 	 * 
-	 * @param customerId Der Datenbank Index (Primärschlüssel) des gesuchten Kunden
-	 * @return HTTP Code 200 oder 404
+	 * @param customerId Der Datenbank Index (Primaerschluessel) des gesuchten Kunden
+	 * @return HTTP Code 200 + aufgefundener Kunde oder 404 
 	 */
 	@GET
 	@Path("/{customerId}")
@@ -86,16 +86,16 @@ public interface ICustomerResource {
 
 	/**
 	 * <p>Diese Methode dient dem Auffinden von Kunden, welchen einem oder mehreren Kriterien entsprechen.
-	 * Ist kein Kriterium in Parameter searchString angegeben wurden, sollen alle Kunden zurückgegeben werden. 
+	 * Ist kein Kriterium in Parameter searchString angegeben wurden, sollen alle Kunden zurueckgegeben werden. 
 	 * Die Kriterien werden konsistent mit einem Zeichen aus der Menge <b>{","," ",";" }</b>, wobei auch ein Whitespace< 
 	 * nach dem Zeichen enthalten sein kann.</p>
 	 * 
-	 * <p>Für alle so angegebenen Kriterien sollen JPA-Like Klauseln mit OR verknüpft werden, 
+	 * <p>Fuer alle so angegebenen Kriterien sollen JPA-Like Klauseln mit OR verknuepft werden, 
 	 * welche jeweils sowohl auf dem firstName als auch auf den lastName des Kunden angewendet werden kann.</p>
 	 * 
 	 * <p>Beispiel:
 	 * <br/>
-	 * enthält das Kriterium den String: 
+	 * enthaelt das Kriterium den String: 
 	 * 
 	 * 	<p><b><i>Max;Mustermann;John;Doe</i></b></p> 
 	 * 
@@ -122,7 +122,7 @@ public interface ICustomerResource {
 	
 	/**
 	 * Diese Methode aktualisiert einen Kunden (U from CRUD). 
-	 * Es soll bei einem erfolgreichem Löschvorgang der HTTP Statuscode 200 zurueckgegeben werden:
+	 * Es soll bei einem erfolgreichem Loeschvorgang der HTTP Statuscode 200 zurueckgegeben werden:
 	 * <p><code>
 	 * Response.status(Status.ACCEPTED).build()
 	 * </code></p>
@@ -136,12 +136,12 @@ public interface ICustomerResource {
 
 	/**
 	 * Diese Methode loescht einen Kunden (D from CRUD).
-	 * Es soll bei einem erfolgreichem Löschvorgang der HTTP Statuscode 200 zurueckgegeben werden:
+	 * Es soll bei einem erfolgreichem Loeschvorgang der HTTP Statuscode 200 zurueckgegeben werden:
 	 * <p><code>
 	 * Response.ok().build()
 	 * </code></p>
 	 * 
-	 * @param customerId Die Id des Kunden, der gelöscht werden soll
+	 * @param customerId Die Id des Kunden, der geloescht werden soll
 	 * @return HTTP Code 200
 	 */
 	@DELETE
