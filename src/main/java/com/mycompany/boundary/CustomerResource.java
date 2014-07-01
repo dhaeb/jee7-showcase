@@ -25,7 +25,7 @@ public class CustomerResource implements ICustomerResource {
 	 * java.lang.String)
 	 */
 	@Override
-	public Response findCustomers(String searchString, String name) {
+	public Response findCustomers(String searchString) {
 		List<Customer> customers;
 		if (searchString != null) {
 			customers = customerService.findCustomers(searchString);
