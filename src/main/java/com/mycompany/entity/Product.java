@@ -2,10 +2,14 @@ package com.mycompany.entity;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -21,6 +25,9 @@ public abstract class Product {
 	
 	private BigDecimal price;
 	
+	@Lob
+	@Basic(fetch=FetchType.LAZY)
+	@Column(length=100000)
 	private byte[] thumbnail;
 	
 	public Product() {}
