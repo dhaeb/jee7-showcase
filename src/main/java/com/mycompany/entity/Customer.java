@@ -20,7 +20,7 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-public abstract class Customer {
+public class Customer {
 
   @Id
   @GeneratedValue(strategy=GenerationType.SEQUENCE)
