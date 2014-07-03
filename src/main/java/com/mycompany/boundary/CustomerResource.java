@@ -99,5 +99,6 @@ public class CustomerResource implements ICustomerResource {
 	public Response sayHello() {
 		return Response.ok(new String[]{"Hello ", " world"}).build();
 	}
-
+	
+	
 }

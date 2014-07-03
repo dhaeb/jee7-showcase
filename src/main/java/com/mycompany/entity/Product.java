@@ -11,6 +11,9 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
+import javax.ws.rs.FormParam;
+
+import org.jboss.resteasy.annotations.providers.multipart.PartType;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
@@ -59,7 +62,9 @@ public abstract class Product {
 	public byte[] getThumbnail() {
 		return thumbnail;
 	}
-
+	
+	@FormParam("thumbnail")
+	@PartType("application/octet-stream")
 	public void setThumbnail(byte[] thumbnail) {
 		this.thumbnail = thumbnail;
 	}
