@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import com.mycompany.control.CustomerService;
+import com.mycompany.control.ValidationException;
 import com.mycompany.entity.Customer;
 
 public class CustomerResource implements ICustomerResource {
@@ -45,7 +46,11 @@ public class CustomerResource implements ICustomerResource {
 	@Override
 	public Response saveCustomer(UriInfo uriInfo, Customer customer)
 			throws URISyntaxException {
-		customerService.saveCustomer(customer);
+		try{
+			customerService.saveCustomer(customer);
+		}catch(ValidationException e) {
+			
+		}		
 		return Response.created(
 				new URI(uriInfo.getRequestUri() + "/" + customer.getId()))
 				.build();
@@ -79,7 +84,11 @@ public class CustomerResource implements ICustomerResource {
 	 */
 	@Override
 	public Response updateCustomer(Customer customer) {
+		try{
 		customerService.updateCustomer(customer);
+		}catch(ValidationException e) {
+			
+		}
 		return Response.status(Status.ACCEPTED).build();
 	}
 
