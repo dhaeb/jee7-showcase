@@ -2,7 +2,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<h2>Customer Overview</h2>
+		<h2>Gas Product Overview</h2>
 	</div>
 	<div class="col-md-6">
 		<form class="form-inline">
@@ -20,24 +20,19 @@
 			<thead>
 				<tr>
 					<th>#</th>
-					<th>Customer name</th>
-					<th>Company</th>
-					<th>Email</th>
-					<th>Fon</th>
-					<th>Created</th>
+					<th>Product name</th>
+					<th>Category</th>
 					<th colspan="2">Options</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="customer in customers">
-					<td>{{customer.id}}</td>
-					<td>{{customer.firstName}} {{customer.lastName}}</td>
-					<td>{{customer.company.name}}</td>
-					<td>{{customer.email}}</td>
-					<td>{{customer.phone}}</td>
-					<td>{{ customer.createDate | date }}</td>
-					<td><a href="#/customer/edit/{{customer.id}}" title="edit" class="btn btn-xs btn-default"><i
-							class="glyphicon glyphicon-edit"></i></a> <a class="btn btn-xs btn-default" ng-click="deleteCustomer(customer.id)"
+				<tr ng-repeat="product in products">
+					<td>{{product.id}}</td>
+					<td>{{product.name}}</td>
+					<td>{{product.price}}</td>
+					<td>{{product.category.name}}</td>
+					<td><a href="#/product/edit/{{product.id}}" title="edit" class="btn btn-xs btn-default"><i
+							class="glyphicon glyphicon-edit"></i></a> <a class="btn btn-xs btn-default" ng-click="deleteProduct(product.id)"
 						title="delete"><i class="glyphicon glyphicon-remove"></i></a></td>
 				</tr>
 			</tbody>
