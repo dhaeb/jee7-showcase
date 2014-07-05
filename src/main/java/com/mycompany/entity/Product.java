@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.ws.rs.FormParam;
 
 import org.jboss.resteasy.annotations.providers.multipart.PartType;
@@ -23,7 +23,7 @@ public abstract class Product {
 	private long id;
 	private String name;
 	
-	@OneToOne
+	@ManyToOne
 	private ProductCategory category;
 	
 	private BigDecimal price;

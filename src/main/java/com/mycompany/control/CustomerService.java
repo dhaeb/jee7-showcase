@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -19,8 +21,9 @@ public class CustomerService {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-
-	public void saveCustomer(Customer customer) {
+	
+	// TODO: catch JPA validation exceptions and expose ValidationException 
+	public void saveCustomer(Customer customer) throws ValidationException {
 		entityManager.persist(customer);
 	}
 
@@ -29,10 +32,10 @@ public class CustomerService {
 		QCustomer qCustomer = QCustomer.customer;
 		JPAQuery query = new JPAQuery(entityManager);
 		BooleanBuilder builder = new BooleanBuilder();
-	    for (String term : searchTerms){
-	        builder.or(qCustomer.firstName.eq(term));
-	        builder.or(qCustomer.lastName.eq(term));
-	    }		
+		for (String term : searchTerms) {
+			builder.or(qCustomer.firstName.eq(term));
+			builder.or(qCustomer.lastName.eq(term));
+		}
 		return query.from(qCustomer).where(builder).list(qCustomer);
 	}
 
@@ -48,6 +51,7 @@ public class CustomerService {
 		return query.from(qCustomer).list(qCustomer);
 	}
 
+	@TransactionAttribute(TransactionAttributeType.NEVER)
 	public List<Customer> findCustomers() {
 		TypedQuery<Customer> query = entityManager.createQuery(
 				"SELECT e FROM Customer e", Customer.class);
@@ -58,7 +62,9 @@ public class CustomerService {
 		return entityManager.find(Customer.class, id);
 	}
 
-	public void updateCustomer(Customer customer) {
+	// TODO: handle JPA ValidationExceptions
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void updateCustomer(Customer customer)  throws ValidationException {
 		entityManager.merge(customer);
 	}
 
@@ -78,19 +84,17 @@ public class CustomerService {
 		return searchTerms;
 	}
 
+	/**
+	 * Diese Art der Query ist schwierig zu warten gefährlich: SQL-Injection:
+	 * Beispiel: Max' or where e.lastName like '%
+	 * 
+	 * @param searchString
+	 * @return
+	 */
 	public List<Customer> findCustomers(String searchString) {
-
-		String[] searchTerms = splitSearchString(searchString);
 		String queryString = "SELECT e FROM Customer e where ";
 
-		int counter = 0;
-		for (String searchTerm : searchTerms) {
-			if (counter++ != 0) {
-				queryString += "or ";
-			}
-			queryString += "e.firstName LIKE '" + searchTerm
-					+ "' OR e.lastName LIKE '" + searchTerm + "' ";
-		}
+		queryString += "e.firstName ='" + searchString + "'";
 
 		TypedQuery<Customer> query = entityManager.createQuery(queryString,
 				Customer.class);

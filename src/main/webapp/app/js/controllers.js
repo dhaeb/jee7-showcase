@@ -2,7 +2,7 @@
 
 angular.module('CrmDemo.controllers',[]).controller('CustomerDetailCtrl',['$scope','$location', '$routeParams','Customer', function ($scope, $location, $routeParams, Customer) {
 
-    if ($location.path() === "/new") {
+    if ($location.path() === "/customer/new") {
         $scope.customer = {
             createDate : new Date(),
             sex : 'unknown'
@@ -16,11 +16,32 @@ angular.module('CrmDemo.controllers',[]).controller('CustomerDetailCtrl',['$scop
     $scope.save = function() {
         if (!!$scope.customer.id) {
             Customer.update($scope.customer, function(customer) {
-                $location.path('/list');
+                $location.path('/customer/list');
             });
         } else {
             Customer.save($scope.customer, function(customer) {
-                $location.path('/list');
+                $location.path('/customer/list');
+            });
+        }
+    };
+}]).controller('ProductDetailCtrl',['$scope','$location', '$routeParams','Product','ProductCategory', function ($scope, $location, $routeParams, Product, ProductCategory) {
+	$scope.productCategories = ProductCategory.query();
+    if ($location.path() === "/product/new") {
+        $scope.product = {};
+    } else {
+        $scope.product = Product.get({
+            id : $routeParams.productId
+        });
+    }
+
+    $scope.save = function() {
+        if (!!$scope.product.id) {
+            Product.update($scope.product, function(product) {
+                $location.path('/product/list');
+            });
+        } else {
+            Product.save($scope.product, function(product) {
+                $location.path('/product/list');
             });
         }
     };
@@ -59,5 +80,41 @@ angular.module('CrmDemo.controllers',[]).controller('CustomerDetailCtrl',['$scop
                 }
             });
     }
+
+}]).controller('ProductListCtrl',['$scope','Product', function ($scope, Product) {
+
+    $scope.products = Product.query();
+    $scope.filteredResults = false;
+
+    $scope.search = function() {
+        $scope.products = Product.query(
+            {
+                searchString: $scope.searchString
+            },
+            function() {
+                $scope.filteredResults = true;
+            }
+        );
+    };
+
+    $scope.clearSearch = function() {
+        $scope.searchString = null;
+        $scope.filteredResults = false;
+        $scope.products = Product.query();
+    };
+
+    $scope.deleteProduct = function(productId) {
+        Product.delete(
+            {
+                id: productId
+            },
+            function() {
+                if(!!$scope.searchString && !!$scope.filteredResults) {
+                    $scope.search();
+                } else {
+                    $scope.products = Product.query();
+                }
+            });
+    };
 
 }]);

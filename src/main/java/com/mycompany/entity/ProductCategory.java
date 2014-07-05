@@ -4,16 +4,16 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
-public abstract class ProductCategory {
+public class ProductCategory {
 	
 	@Id
 	private long id;
 	private String name;
 	
-	@ManyToMany
+	@OneToMany
 	private List<Product> products;
 
 	public long getId() {
